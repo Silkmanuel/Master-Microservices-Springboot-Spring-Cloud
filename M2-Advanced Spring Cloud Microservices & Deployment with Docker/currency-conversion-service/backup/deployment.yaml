@@ -28,9 +28,13 @@ spec:
         - image: silkmanuel/mmv2-currency-conversion-service:0.0.12-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: mmv2-currency-conversion-service-skf54
-          env:
-            - name: CURRENCY_EXCHANGE_URI
-              value: http://currency-exchange
+          envFrom:
+            - configMapRef:
+                name: currency-conversion
+
+            # - name: CURRENCY_EXCHANGE_URI
+            # - name: CURRENCY_EXCHANGE_UI
+            #   value: http://currency-exchange
       restartPolicy: Always
 
 ---
@@ -52,3 +56,15 @@ spec:
     app: currency-conversion
   sessionAffinity: None
   type: LoadBalancer
+
+
+###### CONFIG MAP YML
+### Onde definimos o valor das variáveis de ambiente da aplicação
+---
+apiVersion: v1
+data:
+  CURRENCY_EXCHANGE_UI: http://currency-exchange
+kind: ConfigMap
+metadata:
+  name: currency-conversion
+  namespace: default
