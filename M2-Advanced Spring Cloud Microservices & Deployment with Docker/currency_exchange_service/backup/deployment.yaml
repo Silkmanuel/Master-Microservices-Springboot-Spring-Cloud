@@ -28,6 +28,14 @@ spec:
         - image: silkmanuel/mmv2-currency_exchange_service:0.0.12-SNAPSHOT
           imagePullPolicy: IfNotPresent
           name: mmv2-currency-exchange-service-skf54
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8000
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8000
       restartPolicy: Always
 
 ---
