@@ -7,7 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class LearnSpringFrameworkApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LearnSpringFrameworkApplication.class, args);
+		// SpringApplication.run(LearnSpringFrameworkApplication.class, args);
+		MarioGamer mario = new MarioGamer();
+		GameRunner runner = new GameRunner(mario);
+		runner.run();
+		System.out.println("LEARN RUNNING");
 	}
 
 }
